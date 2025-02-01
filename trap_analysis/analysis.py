@@ -623,9 +623,9 @@ if __name__ == "__main__":
     #     .mean()
     #     .dropna()
     # )
-    df_moon_target.groupby("species_caught")[
-        "initial_bait"
-    ].value_counts().dropna().sort_index(ascending=False).to_clipboard()
+    # df_moon_target.groupby("species_caught")[
+    #     "initial_bait"
+    # ].value_counts().dropna().sort_index(ascending=False).to_clipboard()
 
     print(
         df_moon_target.groupby("species_caught")["initial_bait"]
