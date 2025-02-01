@@ -13,7 +13,10 @@ import ephem
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-from trap_analysis.data_cleaning import convert_columns_to_snake_case
+from trap_analysis.data_cleaning import (
+    convert_columns_to_snake_case,
+    drop_identical_columns,
+)
 from trap_analysis.plotter import create_line_map, create_park_map, create_pie_chart
 
 
@@ -79,19 +82,6 @@ def catch_rate(df):
 def kill_efficiency(df):
     """Kill Efficiency: Total kills per trap type."""
     return df.groupby("trap_type")["total_kills"].sum()
-
-
-def drop_identical_columns(df1, df2, merged_df):
-    """Drop identical columns."""
-    for col in df1.columns:
-        if col in df2.columns:
-            try:
-                merged_df[col + "_x"].equals(merged_df[col + "_y"])
-                merged_df.drop(columns=[col + "_y"], inplace=True)
-                merged_df.rename(columns={col + "_x": col}, inplace=True)
-            except KeyError:
-                pass
-    return merged_df
 
 
 def kill_percentage_for_best_n_pct_traps(df: pd.DataFrame, n: float) -> float:

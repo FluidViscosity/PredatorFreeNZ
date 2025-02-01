@@ -1,5 +1,9 @@
 import pandas as pd
 from trap_analysis.analysis import *
+from trap_analysis.data_cleaning import (
+    drop_identical_columns,
+    convert_columns_to_snake_case,
+)
 from rich import print
 import plotly.express as px
 
