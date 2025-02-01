@@ -76,28 +76,6 @@ def catch_rate(df):
     return df.groupby("trap_id")["total_kills"].sum().mean()
 
 
-def trap_type_pie_chart(df):
-    """Trap Type: Pie chart of trap types.
-    The name of the trap type and the number of traps of that type should be in the segment or shown by a leader line
-    """
-    trap_type_counts = df["trap_type"].value_counts()
-    names = (
-        trap_type_counts.index.astype(str) + " (" + trap_type_counts.astype(str) + ")"
-    )
-    fig = px.pie(
-        trap_type_counts,
-        values=trap_type_counts.values,
-        names=names,
-        title="Trap Type Distribution",
-    )
-    fig.update_layout(legend=dict(x=1, y=0.5, xanchor="right", yanchor="middle"))
-    fig.update_traces(
-        textposition="inside", textinfo="percent+label", textfont=dict(size=16)
-    )
-
-    fig.show()
-
-
 def kill_efficiency(df):
     """Kill Efficiency: Total kills per trap type."""
     return df.groupby("trap_type")["total_kills"].sum()
@@ -433,7 +411,10 @@ def create_all_maps(df: pd.DataFrame, df_line: pd.DataFrame) -> None:
         "records": ":.0f",
     }
     create_park_map = functools.partial(
-        create_park_map, hover_name=hover_name, hover_data=hover_data
+        create_park_map,
+        hover_name=hover_name,
+        hover_data=hover_data,
+        colour_continuous_scale=px.colors.sequential.Viridis,
     )
 
     create_park_map(df_line, "line", title="Trap lines", save_bool=True)
