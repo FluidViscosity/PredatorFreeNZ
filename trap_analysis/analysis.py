@@ -12,7 +12,7 @@ import ephem
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-from trap_analysis.trap_nz_utils import convert_columns_to_snake_case
+from trap_analysis.data_cleaning import convert_columns_to_snake_case
 
 
 """
