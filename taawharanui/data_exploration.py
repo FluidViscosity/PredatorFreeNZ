@@ -12,4 +12,7 @@ if __name__ == "__main__":
     print(traps.columns)
 
     # Let's get a map of different traps
-    # plot of doc200s
+    # create_pie_chart(
+    #     df=traps, column_name="trap_type", title="Trap Counts, Taawharanui"
+    # )
+    create_park_map(df=traps, colour_by="nid", title="Trap placement", save_bool=False)

@@ -1,3 +1,4 @@
+import functools
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -424,6 +425,16 @@ def find_worst_n_traps(df, n):
 
 
 def create_all_maps(df: pd.DataFrame, df_line: pd.DataFrame) -> None:
+    hover_name = ("code",)
+    hover_data = {
+        "trap_kills_per_record": ":.1f",
+        "days_since_last_kill": ":1f",
+        "kills_in_period": ":.0f",
+        "records": ":.0f",
+    }
+    create_park_map = functools.partial(
+        create_park_map, hover_name=hover_name, hover_data=hover_data
+    )
 
     create_park_map(df_line, "line", title="Trap lines", save_bool=True)
     create_park_map(

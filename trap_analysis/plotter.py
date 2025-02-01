@@ -64,6 +64,8 @@ def create_park_map(
     title: str = None,
     save_bool: bool = False,
     legend_title=None,
+    hover_name=None,
+    hover_data=None,
 ):
     size = colour_by
     if title is None:
@@ -82,13 +84,8 @@ def create_park_map(
         size=size,
         color_continuous_scale=px.colors.sequential.Viridis,
         # range_color=[0, 1],
-        hover_name="code",
-        hover_data={
-            "trap_kills_per_record": ":.1f",
-            "days_since_last_kill": ":1f",
-            "kills_in_period": ":.0f",
-            "records": ":.0f",
-        },
+        hover_name=hover_name,
+        hover_data=hover_data,
     )
     fig_map.update_layout(mapbox_style="open-street-map")
     fig_map.update_layout(margin={"r": 0, "t": 40, "l": 2, "b": 2})
