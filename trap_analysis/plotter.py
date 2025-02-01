@@ -66,20 +66,24 @@ def create_park_map(
     legend_title=None,
     hover_name=None,
     hover_data=None,
+    center=None,
+    zoom=13,
 ):
     size = colour_by
     if title is None:
         title = "Shakespear Park"
     if colour_by == "line":
         size = [5] * len(df)
+    if center is None:
+        center = {"lat": df["lat"].mean(), "lon": df["long"].mean()}
 
     fig_map = px.scatter_mapbox(
         df,
         title=title,
         lat="lat",
         lon="long",
-        zoom=13.7,  # -36.606765, 174.810414
-        center={"lat": -36.606250, "lon": 174.807127},
+        zoom=zoom,
+        center=center,
         color=colour_by,
         size=size,
         color_continuous_scale=px.colors.sequential.Viridis,
