@@ -12,6 +12,8 @@ import ephem
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
+from trap_analysis.trap_nz_utils import convert_columns_to_snake_case
+
 
 """
 
@@ -55,12 +57,6 @@ def get_recorded_period(df):
     except AttributeError:
         df["date"] = pd.to_datetime(df["date"], format="%d/%m/%Y %H:%M")
         return df["date"].min(), df["date"].max()
-
-
-def convert_columns_to_snake_case(df):
-    """Convert columns to snake case."""
-    df.columns = df.columns.str.replace(" ", "_").str.lower()
-    return df
 
 
 def total_traps(df):
@@ -566,8 +562,8 @@ def create_all_maps(df: pd.DataFrame, df_line: pd.DataFrame) -> None:
 if __name__ == "__main__":
 
     # Load the data
-    df1 = pd.read_csv("data/manage_trap_records.csv")
-    df2 = pd.read_csv("data/traps_overview.csv")
+    df1 = pd.read_csv("taawharanui/data/manage_traps.csv")
+    df2 = pd.read_csv("taawharanui/data/trap_records.csv")
 
     df1 = convert_columns_to_snake_case(df1)
     df2 = convert_columns_to_snake_case(df2)
