@@ -1,0 +1,31 @@
+[project]
+name = "PredatorFreeNZ"
+version = "0.1"
+description = ""
+authors = [
+    {name = "TomerS", email = "tomer.simhony@gmail.com"},
+]
+dependencies = [
+    "pandas>=2.2.2",
+    "numpy>=1.26.4",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.2",
+    "geopandas>=0.14.4",
+    "rich>=13.7.1",
+    "plotly>=5.22.0",
+    "ephem>=4.1.5",
+    "statsmodels>=0.14.2",
+    "setuptools>=70.0.0",
+    "jinja2>=3.1.4",
+    "weasyprint>=62.3",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+path = "src"
