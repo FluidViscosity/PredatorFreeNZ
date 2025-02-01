@@ -70,8 +70,6 @@ def create_park_map(
     zoom=13,
 ):
     size = colour_by
-    if title is None:
-        title = "Shakespear Park"
     if colour_by == "line":
         size = [5] * len(df)
     if center is None:
