@@ -13,7 +13,7 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 from trap_analysis.data_cleaning import convert_columns_to_snake_case
-from trap_analysis.plotter import create_line_map, create_park_map, df_pie_chart
+from trap_analysis.plotter import create_line_map, create_park_map, create_pie_chart
 
 
 """
@@ -488,8 +488,8 @@ if __name__ == "__main__":
 
     # Temporal Analysis
     df_target, df_traps = temporal_analysis(df_target)
-    df_pie_chart(df_traps, "trap_type", "Trap Type Distribution")
-    df_pie_chart(df_target, "species_caught", "Killed Species Distribution")
+    create_pie_chart(df_traps, "trap_type", "Trap Type Distribution")
+    create_pie_chart(df_target, "species_caught", "Killed Species Distribution")
 
     df_outside = df_target[~df_target["line"].str.contains("TL")]
 

@@ -3,9 +3,9 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
-def df_pie_chart(df, column_name: str, title: str):
-    """: Pie chart of trap types.
-    The name of the trap type and the number of traps of that type should be in the segment or shown by a leader line
+def create_pie_chart(df: pd.DataFrame, column_name: str, title: str):
+    """
+    Pie chart of any countable dataframe column.
     """
     counts = df[column_name].value_counts()
     names = counts.index.astype(str) + " (" + counts.astype(str) + ")"
