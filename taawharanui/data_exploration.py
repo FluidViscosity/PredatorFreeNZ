@@ -8,7 +8,8 @@ if __name__ == "__main__":
 
     # load in the traps csv
     traps = pd.read_csv("taawharanui/data/manage_traps.csv")
-    print(traps.head())
+    traps = convert_columns_to_snake_case(traps)
+    print(traps.columns)
 
     # Let's get a map of different traps
     # plot of doc200s

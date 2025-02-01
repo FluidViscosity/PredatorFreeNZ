@@ -13,6 +13,7 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 from trap_analysis.data_cleaning import convert_columns_to_snake_case
+from trap_analysis.plotter import create_line_map, create_park_map
 
 
 """
@@ -424,84 +425,6 @@ def create_line_summary(line, df, big_df):
         # f.write(fig_map2.to_html(full_html=False, include_plotlyjs="cdn"))
         f.write("</td></tr><tr><td>")
         # f.write("</td></tr></table>")
-
-
-def create_line_map(
-    line: str,
-    df: pd.DataFrame,
-    colour_by: str,
-    save_bool: bool = False,
-    date: str = None,
-):
-    human_readable = (colour_by + "_" + date).replace("_", " ").title()
-
-    fig_map = px.scatter_mapbox(
-        df,
-        title=f"{line}. {human_readable}",
-        lat="lat",
-        lon="long",
-        zoom=15,
-        color=colour_by,
-        size=colour_by,
-        color_continuous_scale=px.colors.sequential.Viridis,
-        range_color=[0, 1],
-        hover_name="code",
-        hover_data={
-            "trap_kills_per_record": ":.1f",
-            "days_since_last_kill": ":1f",
-            "kills_in_period": ":.0f",
-            "records": ":.0f",
-        },
-    )
-    fig_map.update_layout(mapbox_style="open-street-map")
-    fig_map.update_layout(margin={"r": 0, "t": 40, "l": 2, "b": 2})
-    if save_bool:
-        fig_map.write_html("trap_efficiency_map.html")
-    # fig_map.show()
-    return fig_map
-
-
-def create_park_map(
-    df,
-    colour_by="species_caught",
-    title: str = None,
-    save_bool: bool = False,
-    legend_title=None,
-):
-    size = colour_by
-    if title is None:
-        title = "Shakespear Park"
-    if colour_by == "line":
-        size = [5] * len(df)
-
-    fig_map = px.scatter_mapbox(
-        df,
-        title=title,
-        lat="lat",
-        lon="long",
-        zoom=13.7,  # -36.606765, 174.810414
-        center={"lat": -36.606250, "lon": 174.807127},
-        color=colour_by,
-        size=size,
-        color_continuous_scale=px.colors.sequential.Viridis,
-        # range_color=[0, 1],
-        hover_name="code",
-        hover_data={
-            "trap_kills_per_record": ":.1f",
-            "days_since_last_kill": ":1f",
-            "kills_in_period": ":.0f",
-            "records": ":.0f",
-        },
-    )
-    fig_map.update_layout(mapbox_style="open-street-map")
-    fig_map.update_layout(margin={"r": 0, "t": 40, "l": 2, "b": 2})
-
-    if legend_title:
-        fig_map.update_layout(coloraxis_colorbar_title_text=legend_title)
-
-    if save_bool:
-        fig_map.write_html(f"shakespear_park_map_{colour_by}.html")
-    fig_map.show()
 
 
 def find_worst_n_traps(df, n):
