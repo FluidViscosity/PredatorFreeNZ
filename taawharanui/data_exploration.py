@@ -41,7 +41,14 @@ if __name__ == "__main__":
     df = drop_identical_columns(traps, records, merged_df)
 
     # Print metrics
-    print_basic_metrics(df)
+    # print_basic_metrics(df)
+    # species_information(df)
 
-    # Species Information
+    # create a map of the trap lines
+    # create_park_map(df, "line", "Trap lines")
+
+    # exclude outside traplines
+    df = df[~df["line"].str.contains("Outside", na=False)]
+    # create_park_map(df, "line", "Inside lines only")
+    print_basic_metrics(df)
     species_information(df)
