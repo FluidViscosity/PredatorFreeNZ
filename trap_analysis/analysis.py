@@ -13,7 +13,7 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 from trap_analysis.data_cleaning import convert_columns_to_snake_case
-from trap_analysis.plotter import create_line_map, create_park_map
+from trap_analysis.plotter import create_line_map, create_park_map, df_pie_chart
 
 
 """
@@ -88,26 +88,6 @@ def trap_type_pie_chart(df):
         values=trap_type_counts.values,
         names=names,
         title="Trap Type Distribution",
-    )
-    fig.update_layout(legend=dict(x=1, y=0.5, xanchor="right", yanchor="middle"))
-    fig.update_traces(
-        textposition="inside", textinfo="percent+label", textfont=dict(size=16)
-    )
-
-    fig.show()
-
-
-def df_pie_chart(df, column_name: str, title: str):
-    """: Pie chart of trap types.
-    The name of the trap type and the number of traps of that type should be in the segment or shown by a leader line
-    """
-    counts = df[column_name].value_counts()
-    names = counts.index.astype(str) + " (" + counts.astype(str) + ")"
-    fig = px.pie(
-        counts,
-        values=counts.values,
-        names=names,
-        title=title,
     )
     fig.update_layout(legend=dict(x=1, y=0.5, xanchor="right", yanchor="middle"))
     fig.update_traces(
